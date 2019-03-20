@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_80"
+        android:layout_marginTop="@dimen/margin_15">
+
+
+        <ImageView
+            android:id="@+id/iconBack"
+            android:layout_width="@dimen/margin_70"
+            android:layout_height="match_parent"
+            android:padding="@dimen/margin_22"
+            android:src="@drawable/icon_back" />
+
+
+        <ImageView
+            android:id="@+id/iconTick"
+            android:layout_width="@dimen/margin_70"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/margin_22"
+            android:src="@drawable/icon_tick" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_toLeftOf="@+id/iconTick"
+            android:layout_toRightOf="@+id/iconBack">
+
+
+            <TextView
+                android:id="@+id/iconTrim"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_28"
+                android:layout_marginRight="@dimen/margin_2"
+                android:layout_weight="1"
+                android:background="@drawable/bg_trim_selected"
+                android:gravity="center"
+                android:text="Trim"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/fontSize16"
+                android:textStyle="normal" />
+
+
+            <TextView
+                android:id="@+id/iconCut"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_28"
+                android:layout_marginLeft="@dimen/margin_2"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cut_not_selected"
+                android:gravity="center"
+                android:text="Cut"
+                android:textColor="@color/colorButtonSelected"
+                android:textSize="@dimen/fontSize16"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_300"
+        android:layout_below="@+id/topBar"
+        android:layout_marginTop="@dimen/margin_40"
+        android:background="#000" />
+
+
+    <TextView
+        android:id="@+id/tvLeftTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/videoView"
+        android:layout_marginLeft="@dimen/margin_5"
+        android:layout_marginBottom="@dimen/margin_5"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/fontSize14" />
+
+
+    <TextView
+        android:id="@+id/tvRightTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/videoView"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin_5"
+        android:layout_marginBottom="@dimen/margin_5"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/fontSize14" />
+
+
+    <RelativeLayout
+        android:id="@+id/bottomAction"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:layout_below="@+id/tvLeftTime"
+        android:background="@drawable/border_top_bottom_black_gradient">
+
+
+        <ImageView
+            android:id="@+id/iconPlay"
+            android:layout_width="@dimen/margin_70"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_right_black_gradient"
+            android:padding="@dimen/margin_5"
+            android:src="@drawable/icon_play" />
+
+
+        <ImageView
+            android:id="@+id/iconCamera"
+            android:layout_width="@dimen/margin_70"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/border_left_black_gradient"
+            android:padding="@dimen/margin_5"
+            android:src="@drawable/icon_camera" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/iconCamera"
+            android:layout_toRightOf="@+id/iconPlay"
+            android:paddingTop="@dimen/margin_5"
+            android:paddingBottom="@dimen/margin_5">
+
+
+            <TextView
+                android:id="@+id/tvSimple"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border_gradient_textview_right"
+                android:gravity="center"
+                android:text="Simple"
+                android:textSize="@dimen/fontSize18" />
+
+
+            <TextView
+                android:id="@+id/tvAdvanced"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border_gradient_textview_left"
+                android:gravity="center"
+                android:text="Advanced"
+                android:textSize="@dimen/fontSize18" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <org.florescu.android.rangeseekbar.RangeSeekBar
+        android:id="@+id/rangeSikbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bottomAction"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bottomAction"
+        android:layout_marginTop="@dimen/margin_4"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imgStartHere"
+            android:layout_width="@dimen/margin_60"
+            android:layout_height="@dimen/margin_40"
+            android:layout_marginRight="@dimen/margin_20"
+            android:src="@drawable/start_here_normal" />
+
+        <ImageView
+            android:id="@+id/imgEndHere"
+            android:layout_width="@dimen/margin_60"
+            android:layout_height="@dimen/margin_40"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:src="@drawable/end_here_normal" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rangeSikbar">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="@dimen/margin_100"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorWhite" />
+
+
+    </RelativeLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/margin_60"
+        android:layout_height="@dimen/margin_60"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/colorWhite"
+        android:visibility="gone" />
+
+
+</RelativeLayout>
