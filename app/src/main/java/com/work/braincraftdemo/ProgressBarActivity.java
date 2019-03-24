@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
@@ -26,6 +28,8 @@ public class ProgressBarActivity extends AppCompatActivity {
     FFMpegService ffMpegService;
 
     Integer res;
+
+    TextView tvCancel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +49,16 @@ public class ProgressBarActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        tvCancel = findViewById(R.id.tvCancel);
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
         circleProgressBar = findViewById(R.id.circleProgressBar);
         circleProgressBar.setMax(100);
 

@@ -6,15 +6,71 @@
     android:orientation="vertical">
 
 
-    <com.dinuscxj.progressbar.CircleProgressBar
-        android:id="@+id/circleProgressBar"
-        android:layout_width="@dimen/height_150"
-        android:layout_height="@dimen/height_150"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:progress_end_color="@android:color/transparent"
-        app:progress_stroke_width="10dp"
-        app:progress_text_color="#fff"
-        app:style="solid_line" />
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/bg_progress_dialog"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/fontSize10"
+            android:padding="@dimen/margin_10"
+            android:text="Trimming Video"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/fontSize20"
+            android:textStyle="bold" />
+
+
+        <com.dinuscxj.progressbar.CircleProgressBar
+            android:id="@+id/circleProgressBar"
+            android:layout_width="@dimen/height_120"
+            android:layout_height="@dimen/height_120"
+            android:layout_marginBottom="@dimen/fontSize10"
+            app:progress_end_color="@android:color/transparent"
+            app:progress_stroke_width="10dp"
+            app:progress_text_color="@color/colorAccent"
+            app:progress_text_size="@dimen/fontSize18"
+            app:style="solid_line" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/fontSize10"
+            android:gravity="center"
+            android:padding="@dimen/margin_10"
+            android:text="This app export high resolution video. Thats why it may take some time in video rendering, depending on your file size. Thank you for your patience."
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/fontSize16" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/fontSize10"
+            android:background="@color/colorAccent" />
+
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/margin_10"
+            android:text="Cancel"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/fontSize20"
+            android:textStyle="normal" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

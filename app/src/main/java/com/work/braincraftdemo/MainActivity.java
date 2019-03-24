@@ -491,6 +491,8 @@ public class MainActivity extends AppCompatActivity {
         final Uri mVideoUri = Uri.parse(path);
         final int mHeightView = getResources().getDimensionPixelOffset(R.dimen.margin_100);
 
+
+
         BackgroundTask
                 .execute(new BackgroundTask.Task("", 0L, "") {
                              @Override
@@ -518,7 +520,7 @@ public class MainActivity extends AppCompatActivity {
                                      final long interval = 1000000;
 
                                      for (int i = 1; i < numThumbs; ++i) {
-                                         Log.d("for numThumbs", interval * i + "");
+
                                          Bitmap bitmap = mediaMetadataRetriever.getFrameAtTime(i * interval, MediaMetadataRetriever.OPTION_NEXT_SYNC);
 
                                          try {
@@ -527,10 +529,11 @@ public class MainActivity extends AppCompatActivity {
                                              e.printStackTrace();
                                          }
                                          thumbnailList.add(bitmap);
+                                         addViewFrameInView(thumbnailList);
                                      }
 
                                      mediaMetadataRetriever.release();
-                                     addViewFrameInView(thumbnailList);
+
                                  } catch (final Throwable e) {
                                      Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
                                  }
