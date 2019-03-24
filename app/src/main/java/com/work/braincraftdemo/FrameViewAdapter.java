@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +26,13 @@ public class FrameViewAdapter extends RecyclerView.Adapter<FrameViewAdapter.View
     private int lastPosition = -1;
     protected OnRecyclerViewItemActionListener listener = null;
     ArrayList<Bitmap> thumbnailList;
+    Integer positionStart;
+    Integer positionEnd;
 
     public interface OnRecyclerViewItemActionListener<TransactionHistory> {
         void onRecyclerViewActionClick(int position);
+
+        void invalidInput(String msg);
     }
 
     public FrameViewAdapter(Context con, OnRecyclerViewItemActionListener listener) {
@@ -65,6 +70,24 @@ public class FrameViewAdapter extends RecyclerView.Adapter<FrameViewAdapter.View
 
             if (thumbnailList != null && thumbnailList.get(position) != null) {
                 Glide.with(mContext).load(thumbnailList.get(position)).into(vh.imageView);
+                int actualPos = position + 1;
+
+                if (positionStart != null && positionEnd != null) {
+                    if (actualPos <= positionStart || actualPos >= positionEnd) {
+                        vh.imageView.setAlpha(0.3f);
+                    } else {
+                        vh.imageView.setAlpha(1f);
+                    }
+
+                } else if (positionStart != null) {
+                    if (actualPos <= positionStart) {
+                        vh.imageView.setAlpha(0.3f);
+                    } else {
+                        vh.imageView.setAlpha(1f);
+                    }
+                }
+
+
             }
 
         }
@@ -104,6 +127,46 @@ public class FrameViewAdapter extends RecyclerView.Adapter<FrameViewAdapter.View
     public void setData(ArrayList<Bitmap> thumbnailList) {
         this.thumbnailList = thumbnailList;
         notifyDataSetChanged();
+    }
+
+
+    public void setStartForm(ArrayList<Bitmap> thumbnailList, int posStart) {
+        Log.d("setStartForm", posStart + "");
+        if (positionEnd != null && positionEnd != 0) {
+            if (posStart < positionEnd) {
+                this.thumbnailList = thumbnailList;
+                this.positionStart = posStart;
+                notifyDataSetChanged();
+            } else {
+                positionEnd = null;
+                this.thumbnailList = thumbnailList;
+                this.positionStart = posStart;
+                notifyDataSetChanged();
+            }
+        } else {
+            this.thumbnailList = thumbnailList;
+            this.positionStart = posStart;
+            notifyDataSetChanged();
+        }
+
+    }
+
+
+    public void setEndPosition(ArrayList<Bitmap> thumbnailList, int posEnd) {
+        Log.d("setEndPosition", posEnd + "");
+
+        if (positionStart != null) {
+            if (posEnd > positionStart) {
+                this.thumbnailList = thumbnailList;
+                this.positionEnd = posEnd;
+                notifyDataSetChanged();
+            } else {
+                listener.invalidInput("Invalid selection.");
+            }
+        } else {
+            listener.invalidInput("Invalid selection. Select start position first");
+        }
+
     }
 
     public class ItemViewHolder extends ViewHolder {

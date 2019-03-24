@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.work.braincraftdemo.seekbar_frame.BackgroundTask;
@@ -115,6 +116,11 @@ public class MainActivity extends AppCompatActivity {
             public void onRecyclerViewActionClick(int position) {
 
             }
+
+            @Override
+            public void invalidInput(String msg) {
+                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
         });
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -132,9 +138,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if (mCenterPivot == 0) {
 
-                    // Default pivot , Its a bit inaccurate .
-                    // Better pass the center pivot as your Center Indicator view's
-                    // calculated center on it OnGlobalLayoutListener event
                     mCenterPivot = lm.getOrientation() == LinearLayoutManager.HORIZONTAL ? (recyclerView.getLeft() + recyclerView.getRight()) : (recyclerView.getTop() + recyclerView.getBottom());
                 }
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -330,12 +333,13 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    int startPosition = 0;
+    Integer startPosition = 0;
 
-    int endPosition = 0;
+    Integer endPosition = 0;
 
     private void performStartHereAction() {
-        startPosition = frameCurrentCenterPosition;
+        startPosition = frameCurrentCenterPosition - 1;
+        adapter.setStartForm(thumbnailList, startPosition);
         imgStartHere.setImageResource(R.drawable.start_here_after_press);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -348,7 +352,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performEndHereAction() {
-        endPosition = frameCurrentCenterPosition;
+        endPosition = frameCurrentCenterPosition - 1;
+        adapter.setEndPosition(thumbnailList, endPosition);
         imgEndHere.setImageResource(R.drawable.end_here_after_press);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -490,7 +495,6 @@ public class MainActivity extends AppCompatActivity {
         String path = "android.resource://" + getPackageName() + "/" + R.raw.sample_video;
         final Uri mVideoUri = Uri.parse(path);
         final int mHeightView = getResources().getDimensionPixelOffset(R.dimen.margin_100);
-
 
 
         BackgroundTask
