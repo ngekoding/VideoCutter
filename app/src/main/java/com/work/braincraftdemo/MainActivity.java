@@ -338,7 +338,14 @@ public class MainActivity extends AppCompatActivity {
     Integer endPosition = 0;
 
     private void performStartHereAction() {
-        startPosition = frameCurrentCenterPosition - 1;
+        Log.d("frameCurrentPosition", "" + frameCurrentCenterPosition);
+
+        if (frameCurrentCenterPosition == 0)
+            frameCurrentCenterPosition = 4;
+
+        startPosition = frameCurrentCenterPosition - 2;
+
+
         adapter.setStartForm(thumbnailList, startPosition);
         imgStartHere.setImageResource(R.drawable.start_here_after_press);
         new Handler().postDelayed(new Runnable() {
@@ -352,6 +359,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performEndHereAction() {
+        if (frameCurrentCenterPosition == 0)
+            frameCurrentCenterPosition = 5;
+        Log.d("frameCurrentPosition", "" + frameCurrentCenterPosition);
         endPosition = frameCurrentCenterPosition - 1;
         adapter.setEndPosition(thumbnailList, endPosition);
         imgEndHere.setImageResource(R.drawable.end_here_after_press);
@@ -461,6 +471,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         command = new String[]{"-ss", "" + startMs / 1000, "-y", "-i", original_path, "-t", "" + (endMs - startMs) / 1000, "-vcodec", "mpeg4", "-b:v", "2097152", "-b:a", "48000", "-ac", "2", "-ar", "22050", dest.getAbsolutePath()};
+//        command = new String[]{"ffmpeg -i input.mp4 -ss 00:00:50.0 -codec copy -t 20 output.mp4", dest.getAbsolutePath()};
 
 
     }
